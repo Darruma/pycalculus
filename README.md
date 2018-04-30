@@ -1,2 +1,2 @@
-# pycalculus
-Implementing the derivative and integration operations on functions in python
+# pymaths
+A collection of mathematics based python programs

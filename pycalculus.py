@@ -10,8 +10,7 @@ def derivative_operator(f): # define a function that takes a function f
     return fPrime
 
 
-derivative = derivative_operator(lambda x:x *x)
-print(derivative(10))
+
 
 
 def integrate(f): # takes a function f 
@@ -28,10 +27,17 @@ def integrate(f): # takes a function f
         return int(sum)
     return integral
 
-ig = integrate(lambda x:x * x)
-print(ig(0,10))
-    
-    
-        
-        
+choice = input('Type I for integration and D for differentiation')
+func = input("enter function")
 
+if(choice=='I')
+{
+    lower = input('input lower bound for integral')
+    higher = input('input higher bound for integral')
+    print(integrate(eval(func))(lower,higher))
+}
+if(choice == 'D')
+{
+    point = input('input the point at which you want to find the derivative');
+    print(derivative_operator(eval(func))(point))
+}

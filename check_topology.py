@@ -1,4 +1,4 @@
-from topological_space import Topological_Space 
+from topologicalspace import Topological_Space
 main = input('Enter the set for your topological space')
 topology = input('Enter your topology')
 

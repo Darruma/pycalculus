@@ -10,7 +10,7 @@ class Calculus:
 
     def integrate(self,f): # takes a function f 
         def integral(a,b): # returns a function which integrates between a and b
-            rectangleWidth = (b - a) / 1000
+            rectangleWidth = (b - a) * self.dx
             sum = 0
             index = a
             while(index <= b):

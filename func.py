@@ -18,11 +18,14 @@ class Function:
             function = function + '+'
             for token in tokenArray:
                 function = function + token.val
+        print(function[1:])
         return function[1:]
 
     def tokenify(self, text):
         text = text.replace("^","**")
         expressions = text.split("+")
+        expressions = list(map(lambda exp: exp.lower(),expressions))
+        print(expressions)
         tokens = []
         for expression in expressions:
             tokenArray = []

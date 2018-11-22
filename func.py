@@ -2,6 +2,7 @@ import re
 from token import Token
 class Function:
     def __init__(self, func):
+        self.special_expression = ['sin(x)','cos(x)','tan(x)']
         self.variable = self.determine_variable(func)
         self.func = eval('lambda ' + self.variable + ':' + self.parse(func))
 

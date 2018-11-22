@@ -5,7 +5,8 @@ class Calculus:
     def derivative_operator(self,f):  # define a function that takes a function f
         def fPrime(x):
             value = (f(x + self.dx) - f(x)) / self.dx
-            return "{:-1}\n".format(value)
+            # return "{:-1}\n".format(value)
+            return round(value,3)
         return fPrime
 
     def integrate(self,f): # takes a function f 

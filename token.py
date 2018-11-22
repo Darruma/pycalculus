@@ -1,5 +1,6 @@
 class Token:
     def __init__(self,text,var):
+        self.special_expression = ['sin(x)','cos(x)','tan(x)']
         self.val = text
         self.var = var
 

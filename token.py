@@ -5,7 +5,7 @@ class Token:
         self.var = var
 
     def isOperand(self):
-        if self.val in self.var or self.val in '0123456789':
+        if self.val in self.var or self.val in '0123456789' ir self.val in special_expression:
             return True
         else:
             return False

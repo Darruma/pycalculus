@@ -2,7 +2,7 @@ import re
 from token import Token
 class Function:
     def __init__(self, func):
-        self.special_expression = ['sin(x)','cos(x)','tan(x)']
+        self.special_expressions = ['sin(x)','cos(x)','tan(x)']
         self.variable = self.determine_variable(func)
         self.func = eval('lambda ' + self.variable + ':' + self.parse(func))
 
@@ -14,34 +14,34 @@ class Function:
 
     def parse(self, func):
         tokens = self.tokenify(func)
-        function = ""
-        for tokenArray in tokens:
-            function = function + '+'
-            for token in tokenArray:
-                function = function + token.val
-        print(function[1:])
-        return function[1:]
-
-    def tokenify(self, text):
-        text = text.replace("^","**")
-        expressions = text.split("+")
-        expressions = list(map(lambda exp: exp.lower(),expressions))
-        print(expressions)
-        tokens = []
-        for expression in expressions:
-            tokenArray = []
-            for character in expression:
-                new_token = Token(character,self.variable)
-                tokenArray.append(new_token)
-            tokens.append(tokenArray)
-        return self.convert(tokens)
-
-    def convert(self,tokens):
-        for exp in tokens:
-            for i in range(0,len(exp) - 1):
-                if exp[i].isOperand() and exp[i+1].isOperand():
-                    newToken = Token('*',self.variable)
-                    exp.insert(i+1,newToken)
-        return tokens
+        # convert tokens into function that can be evaluated
        
+    def tokenify(self, text):
+        # convert function text into tokens
+        # search for operators and operands
+        tokens = []
+        for i in range(0,len(text)):
+            ch = text[i]
+            if ch == '+' or ch == '*'
+                tokens.append(Token(text[i],self.variable))
+            temp = text[i] + text[i+1] + text[i+2] + text[i+3]
+            expression = search_special_expressions(temp)
+            if expression not == 'No match':
+                tokens.append(Token(text[i],self.variable))
+
+    def search_special_expressions(self,text):
+        for expression in self.special_expressions:
+            if text == expression:
+                return expression
+        return 'No match'
+
+
+            
+
+
+
+
+
+        
+        
 

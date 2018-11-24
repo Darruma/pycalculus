@@ -28,6 +28,7 @@ class Function:
             expression = search_special_expressions(temp)
             if expression not == 'No match':
                 tokens.append(Token(text[i],self.variable))
+                i = i + 3
 
     def search_special_expressions(self,text):
         for expression in self.special_expressions:

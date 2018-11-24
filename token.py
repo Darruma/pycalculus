@@ -1,11 +1,16 @@
 class Token:
-    def __init__(self,text,var):
-        self.special_expression = ['sin(x)','cos(x)','tan(x)']
-        self.val = text
-        self.var = var
+    def __init__(self,text,indeterminate):
+    	self.indeterminate = indeterminate
+        self.value = text
+    	self.type = self.find_type()
 
-    def isOperand(self):
-        if self.val in self.var or self.val in '0123456789' ir self.val in special_expression:
-            return True
-        else:
-            return False
+    def find_type(self):
+    	if self.value in '0123456789':
+    		return 'num'
+    	if self.value == self.type:
+    		return 'var'
+    	if self.value == 'sin(x)' or self.value == 'cos(x)' or self.value == 'tan(x)':
+    		return 'trig'
+    	if self.value == '(' or self.value == ')':
+    		return 'punc'
+

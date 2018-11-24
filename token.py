@@ -3,6 +3,7 @@ class Token:
 		self.value = text
 		self.indeterminate = indeterminate
 		self.type = self.find_type()
+		self.len = len(text)
 
 	def find_type(self):
 		if self.value in '0123456789':

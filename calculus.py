@@ -3,9 +3,8 @@ class Calculus:
         self.dx = 1/(10 ** precision)
 
     def derivative_operator(self,f):  # define a function that takes a function f
-        def fPrime(x):
+        def fPrime(x):                # returns the derivative function
             value = (f(x + self.dx) - f(x)) / self.dx
-            # return "{:-1}\n".format(value)
             return round(value,3)
         return fPrime
 

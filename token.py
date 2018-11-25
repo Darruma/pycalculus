@@ -13,7 +13,6 @@ class Token:
 		elif self.value == self.indeterminate:
 			return 'operand'
 		elif self.value in ['sin','cos','tan','exp']:
-			print('trig operator')
 			return 'operand'
 		elif self.value == ')' or self.value == '(':
 			return 'punc'

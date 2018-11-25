@@ -6,11 +6,18 @@ class Token:
 		self.len = len(text)
 
 	def find_type(self):
+		if self.value in '*+/-':
+			return 'operator'
 		if self.value in '0123456789':
-			return 'num'
+			return 'operand'
 		elif self.value == self.indeterminate:
-			return 'var'
-		elif self.value == 'sin(x)' or self.value == 'cos(x)' or self.value == 'tan(x)':
-			return 'trig'
+			return 'operand'
+		elif self.value in ['sin','cos','tan','exp']:
+			print('trig operator')
+			return 'operand'
 		elif self.value == ')' or self.value == '(':
 			return 'punc'
+	def setArgs(self,exp):
+		self.args = Token(exp,self.indeterminate)
+
+		

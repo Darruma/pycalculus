@@ -5,39 +5,62 @@ class Function:
         self.special_functions = ['sin','cos','tan','exp']
         self.variable = self.determine_variable(func)
         self.func = self.parse(func)
+
     def determine_variable(self,expression):
         return 'x'
 
     def parse(self, func):
         tokens = self.tokenify(func)
+        print(list(map(lambda token : token.value,tokens)))
+        tokens = self.add_multiples(tokens)
         return list(map(lambda token : token.value,tokens))
         # convert tokens into function that can be evaluated
 
-    def search_special_expressions(self,text):
-        for expression in self.special_functions:
-            if text == expression:
-                return expression
-        return 'No match'
+    def add_multiples(self,tokens):
+        for i in range(len(tokens)):
+            if tokens[i].type == 'operand' and tokens[i+1].type == 'operand':
+                tokens.insert(i+1,Token('*',self.variable))
+        return tokens
+
+    def search_special_expressions(self,text,position):
+        for index in range(position,len(text)):
+            keyword_search = text[index:index + 3]
+            if keyword_search in self.special_functions:
+                argIndex = index+4
+                arg = ''
+                while not text[argIndex] == ')':
+                    arg += text[argIndex]
+                    argIndex += 1
+                return {
+                    'success':True,
+                    'special_func':keyword_search,
+                    'argument':arg,
+                    'nextIndex':argIndex
+                 }
+        return {
+            'success':False
+        }
        
     def tokenify(self, text):
         # convert function text into tokens
+
         tokens = []
         i = 0
         while i < len(text):
             temp = ''
             ch = text[i]
-            if ch == "+" or ch == "*" or ch == self.variable: 
+            if ch == "+" or ch == "*" or ch == self.variable or ch in '0123456789()': 
                 tokens.append(Token(text[i],self.variable))
-            #if i + 6 <= len(text): # if a 'special' function can be found
-            #    temp = text[i] + text[i+1] + text[i+2] + text[i+3] + text[i+4] + text[i+5]
-            #    expression = self.search_special_expressions(temp)
-            #    if not expression == 'No match':
-            #        tokens.append(Token(expression,self.variable))
-            #        i = i + 5
+            special_exp_data = self.search_special_expressions(text,i)
+            print(special_exp_data)
+            if special_exp_data.get('success'):
+                tok = Token(special_exp_data.get('special_func'),self.variable)
+                tok.setArgs(special_exp_data.get('argument'))
+                tokens.append(tok)
+                i = special_exp_data.get('nextIndex')
             i = i + 1 
         return tokens
 
-    
 
 
             

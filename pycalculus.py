@@ -36,5 +36,5 @@ calc = Calculus(6)
 #    else:
 #        print("Error please try again")
 
-myFunc = Function("sin(x)+cos(x)*x")
+myFunc = Function("3x+xsi")
 print(myFunc.func)

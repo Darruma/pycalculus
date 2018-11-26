@@ -9,11 +9,18 @@ class Function:
     def determine_variable(self,expression):
         return 'x'
     def parse(self, func):
-        tokens = self.tokenify(func)
-        print(list(map(lambda token : token.value,tokens)))
-        tokens = self.explicit_multiply(tokens)
-        return list(map(lambda token : token.value,tokens))
         # convert tokens into function that can be evaluated
+
+        tokens = self.tokenify(func)
+        tokens = self.explicit_multiply(tokens)
+
+    def evaluate(self,tokens):
+        function = ''
+        for token in tokens:
+            function = function + token.value
+        return eval(function)
+
+
     def explicit_multiply(self,tokens):
         i = 0
         while i < len(tokens)-1:
@@ -59,7 +66,6 @@ class Function:
                 tokens.append(Token(self.variable,self.variable))
             special_exp_data = self.search_special_expression(text,i)
             if special_exp_data.get('success'):
-                print(special_exp_data.get('special_func'))
                 tok = Token(special_exp_data.get('special_func'),self.variable)
                 tok.setArgs(special_exp_data.get('argument'))
                 tokens.append(tok)

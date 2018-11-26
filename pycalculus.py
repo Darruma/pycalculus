@@ -36,5 +36,5 @@ calc = Calculus(6)
 #    else:
 #        print("Error please try again")
 
-myFunc = Function("x^2 + sin(5x)")
+myFunc = Function("x(x+2)(x+3)")
 print(myFunc.func)

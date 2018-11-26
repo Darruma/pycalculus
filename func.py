@@ -15,13 +15,14 @@ class Function:
         return list(map(lambda token : token.value,tokens))
         # convert tokens into function that can be evaluated
     def explicit_multiply(self,tokens):
-        for i in range(len(tokens)-1):
+        i = 0
+        while i < len(tokens)-1:
             if tokens[i].type == 'operand' and tokens[i+1].type == 'operand':
                 tokens.insert(i+1,Token('*',self.variable))
-            if tokens[i].value == ')' and not i == 0:
-                tokens.insert(i+1,Token('*',self.variable))
             if tokens[i].value == '(':
-                tokens.insert(i-1,Token('*',self.variable))
+                tokens.insert(i,Token('*',self.variable))
+                i = i + 1
+            i = i + 1
         return tokens
 
     def search_special_expression(self,text,position):

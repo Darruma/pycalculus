@@ -24,18 +24,19 @@ class Function:
                 tokens.insert(i-1,Token('*',self.variable))
         return tokens
 
-    def multiply_brackets(self,tokens):
-        pass
-
     def search_special_expression(self,text,position):
         keyword_search = text[position:position + 3]
+        #look for special expression
         if keyword_search in self.special_functions:
+            # if the keyword is a special function , search for the arguments
             argIndex = position+4
-            print('argument index:'+text[argIndex])
             arg = ''
+
             while not text[argIndex] == ')':
+                # until the end bracket is found , concantenate to characters to arg
                 arg += text[argIndex]
                 argIndex += 1
+                # calcualte argIndex so we know where to continue from
                 return {
                     'success':True,
                     'special_func':keyword_search,
@@ -45,24 +46,17 @@ class Function:
         return {
         'success':False
         }
-
-
     def tokenify(self, text):
-
         tokens = []
         i = 0
         while i < len(text):
             temp = ''
             ch = text[i]
             if ch in '+-/*012345678()^':
-                print('added token:' + ch)
                 tokens.append(Token(text[i],self.variable))
             if ch == self.variable:
-                print('added x')
                 tokens.append(Token(self.variable,self.variable))
             special_exp_data = self.search_special_expression(text,i)
-            print(i)
-            print(special_exp_data)
             if special_exp_data.get('success'):
                 print(special_exp_data.get('special_func'))
                 tok = Token(special_exp_data.get('special_func'),self.variable)

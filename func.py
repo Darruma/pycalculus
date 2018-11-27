@@ -17,6 +17,8 @@ class Function:
     def evaluate(self,tokens):
         function = ''
         for token in tokens:
+            if token.value == '^':
+                function = function + '**';
             if token.type == 'func_operand':
                 arg_as_func = Function(token.args.value)
                 function = "Math." +token.value + '(' + arg_as_func.func +")"

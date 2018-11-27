@@ -4,6 +4,10 @@ class Token:
 		self.indeterminate = indeterminate
 		self.type = self.find_type()
 		self.len = len(text)
+	def __repr__(self):
+		if hasattr(self,'args'):
+			return self.value + '(' + self.args.value + ")"
+		return self.value 
 
 	def find_type(self):
 		if self.value in '*+/-':
@@ -13,7 +17,7 @@ class Token:
 		elif self.value == self.indeterminate:
 			return 'operand'
 		elif self.value in ['sin','cos','tan','exp']:
-			return 'operand'
+			return 'func_operand'
 		elif self.value == ')' or self.value == '(':
 			return 'punc'
 	def setArgs(self,exp):

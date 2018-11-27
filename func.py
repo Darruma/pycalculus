@@ -10,21 +10,25 @@ class Function:
         return 'x'
     def parse(self, func):
         # convert tokens into function that can be evaluated
-
         tokens = self.tokenify(func)
         tokens = self.explicit_multiply(tokens)
+        return self.evaluate(tokens)
 
     def evaluate(self,tokens):
         function = ''
         for token in tokens:
-            function = function + token.value
-        return eval(function)
+            if token.type == 'func_operand':
+                arg_as_func = Function(token.args.value)
+                function = "Math." +token.value + '(' + arg_as_func.func +")"
+            else:
+                function = function + token.value
+        return function
 
 
     def explicit_multiply(self,tokens):
         i = 0
         while i < len(tokens)-1:
-            if tokens[i].type == 'operand' and tokens[i+1].type == 'operand':
+            if 'operand' in tokens[i].type and 'operand' in tokens[i+1].type:
                 tokens.insert(i+1,Token('*',self.variable))
             if tokens[i].value == '(':
                 tokens.insert(i,Token('*',self.variable))
@@ -45,12 +49,12 @@ class Function:
                 arg += text[argIndex]
                 argIndex += 1
                 # calcualte argIndex so we know where to continue from
-                return {
+            return {
                     'success':True,
                     'special_func':keyword_search,
                     'argument':arg,
                     'nextIndex':argIndex+1
-                 }
+            }
         return {
         'success':False
         }
@@ -68,6 +72,7 @@ class Function:
             if special_exp_data.get('success'):
                 tok = Token(special_exp_data.get('special_func'),self.variable)
                 tok.setArgs(special_exp_data.get('argument'))
+
                 tokens.append(tok)
                 i = special_exp_data.get('nextIndex')
             i = i + 1

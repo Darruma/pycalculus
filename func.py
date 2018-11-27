@@ -8,6 +8,13 @@ class Function:
 
     def determine_variable(self,expression):
         return 'x'
+
+    def __add__(self,other):
+        return Function(self.func + '+' + other.func)
+    def __mul__(self,other):
+        return Function(self.func+ '*' + other.func)
+    def __mul__(self,other):
+        return Function(self.func + '-' + other.func)
     def parse(self, func):
         # convert tokens into function that can be evaluated
         tokens = self.tokenify(func)

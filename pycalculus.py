@@ -5,7 +5,7 @@ from functools import reduce
 storedFunctions = {}
 calc = Calculus(6)
 while 1:
-	user_input = input(">> ").split(" ")
+	user_input = input(">> ")
 	equalsPosition = user_input.find('=')
 	if not equalsPosition == -1:
 		identifier = user_input[0:equalsPosition]
@@ -14,13 +14,13 @@ while 1:
 		# e.g f(x) = sin(3x) or g(x) = cos(2x)
 		# else, evaluate the expression then add it to the dictionary
 		# e.g g(x) = f(x)+g(x)
-		storedFunctions.update({name:expression})
+		storedFunctions.update({identifier:expression})
 	elif user_input[:3] == 'add':
-		
+		print(user_input[3:])
 
 	elif user_input == 'functions':
 		for function in list(storedFunctions.keys()):
-			print(function + " := " + storedFunctions[function].func)
+			print(function + ":= " + storedFunctions[function].func)
 	elif user_input == 'exit':
 		break
 	else:

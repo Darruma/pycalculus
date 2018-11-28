@@ -52,9 +52,16 @@ class Function:
             # if the keyword is a special function , search for the arguments
             argIndex = position+4
             arg = ''
-
-            while not text[argIndex] == ')':
+            parens = 1
+            while not parens == 0:
                 # until the end bracket is found , concantenate to characters to arg
+                if text[argIndex] == '(':
+                    parens = parens + 1
+                elif text[argIndex] == ')':
+                    if parens == 1:
+                        break
+                    else:
+                        parens = parens - 1
                 arg += text[argIndex]
                 argIndex += 1
                 # calcualte argIndex so we know where to continue from
@@ -62,7 +69,7 @@ class Function:
                     'success':True,
                     'special_func':keyword_search,
                     'argument':arg,
-                    'nextIndex':argIndex+1
+                    'nextIndex':argIndex
             }
         return {
         'success':False

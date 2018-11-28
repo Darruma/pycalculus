@@ -10,7 +10,7 @@ class Token:
 		return self.value 
 
 	def find_type(self):
-		if self.value in '*+/-':
+		if self.value in '*+/-^':
 			return 'operator'
 		if self.value in '0123456789':
 			return 'operand'

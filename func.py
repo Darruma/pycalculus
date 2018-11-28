@@ -10,11 +10,11 @@ class Function:
         return 'x'
 
     def __add__(self,other):
-        return Function(self.func + '+' + other.func)
+        self.func + '+' + other.func
     def __mul__(self,other):
-        return Function(self.func+ '*' + other.func)
+        self.func+ '*' + other.func
     def __mul__(self,other):
-        return Function(self.func + '-' + other.func)
+        self.func + '-' + other.func
 
     def compose(self,other):
         composed = ''
@@ -23,7 +23,7 @@ class Function:
                 composed = composed + other.func
             else:
                 composed = composed + self.func[i]
-        return Function(composed);
+        return composed
     def parse(self, func):
         # convert tokens into function that can be evaluated
         tokens = self.tokenify(func)
@@ -35,17 +35,18 @@ class Function:
         for token in tokens:
             if token.value == '^':
                 function = function + '**';
-            if token.type == 'func_operand':
+            elif token.type == 'func_operand':
                 arg_as_func = Function(token.args.value)
                 function = "Math." +token.value + '(' + arg_as_func.func +")"
             else:
                 function = function + token.value
         return function
 
-
     def explicit_multiply(self,tokens):
         i = 0
+        print(tokens)
         while i < len(tokens)-1:
+            print(tokens[i].type);
             if 'operand' in tokens[i].type and 'operand' in tokens[i+1].type:
                 tokens.insert(i+1,Token('*',self.variable))
             if tokens[i].value == '(':

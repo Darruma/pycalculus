@@ -5,7 +5,7 @@ from functools import reduce
 storedFunctions = {}
 calc = Calculus(6)
 while 1:
-	user_input = input(">> ")
+	user_input = input(">> ") 
 	equalsPosition = user_input.find('=')
 	if not equalsPosition == -1:
 		identifier = user_input[0:equalsPosition]

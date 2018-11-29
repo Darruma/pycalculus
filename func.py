@@ -14,7 +14,7 @@ class Function:
         return Function(self.func + '+' + other.func)
     def __mul__(self,other):
         return Function(self.func+ '*' + other.func)
-    def __mul__(self,other):
+    def __sub__(self,other):
         return Function(self.func + '-' + other.func)
 
     def compose(self,other):

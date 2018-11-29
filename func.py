@@ -4,17 +4,18 @@ class Function:
     def __init__(self, func):
         self.special_functions = ['sin','cos','tan','exp']
         self.variable = self.determine_variable(func)
+        self.readable_func = func
         self.func = self.parse(func)
 
     def determine_variable(self,expression): #rewrite to work with functions of more than one variable
         return 'x'
 
     def __add__(self,other):
-        self.func + '+' + other.func
+        return Function(self.func + '+' + other.func)
     def __mul__(self,other):
-        self.func+ '*' + other.func
+        return Function(self.func+ '*' + other.func)
     def __mul__(self,other):
-        self.func + '-' + other.func
+        return Function(self.func + '-' + other.func)
 
     def compose(self,other):
         composed = ''
@@ -23,7 +24,7 @@ class Function:
                 composed = composed + other.func
             else:
                 composed = composed + self.func[i]
-        return composed
+        return Function(composed)
     def parse(self, func):
         # convert tokens into function that can be evaluated
         tokens = self.tokenify(func)
@@ -46,7 +47,6 @@ class Function:
         i = 0
         print(tokens)
         while i < len(tokens)-1:
-            print(tokens[i].type);
             if 'operand' in tokens[i].type and 'operand' in tokens[i+1].type:
                 tokens.insert(i+1,Token('*',self.variable))
             if tokens[i].value == '(':

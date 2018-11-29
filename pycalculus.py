@@ -33,13 +33,29 @@ def parseFunctionExpression(declaration):
 
 while 1:
 	user_input = input(">> ").split(" ")
+	if user_input[0] == 'integrate':
+		betweenPosition = user_input.index('between')
+		if betweenPosition == -1:
+			print("storing function")
+		else:
+			integrable_input = [1:betweenPosition]
+			integrablefunc = parseFunctionExpression(integrable_input)
+			if integrablefunc is not None:
+				lowerBound = float(user_input[user_input.index('and')-1])
+				upperBound = float(user_input[user_input.index('and') + 1]) 
+				integrate_between = str(calc.integrate(eval('lambda x:' + integrablefunc.func))(lowerBound)(upperBound))
+				print(">> " + integrate_between)
 	if user_input[0] == 'differentiate':
-		diffble_input = user_input[1:user_input.index('at')]
-		diffblefunc = parseFunctionExpression(diffble_input)
-		if diffblefunc is not None:
-			val = float(user_input[len(user_input)-1])
-			derivative_at_val = str(calc.derivative_operator(eval('lambda x:' + diffblefunc.func))(val))
-			print(">> " + derivative_at_val)
+		atPosition = user_input.index('at')
+		if atPosition == -1:
+			print("storing function")
+		else:
+			diffble_input = user_input[1:atPosition]
+			diffblefunc = parseFunctionExpression(diffble_input)
+			if diffblefunc is not None:
+				val = float(user_input[len(user_input)-1])
+				derivative_at_val = str(calc.derivative_operator(eval('lambda x:' + diffblefunc.func))(val))
+				print(">> " + derivative_at_val)
 	elif "=" in user_input: 
 		equals_index = user_input.index("=")
 		identifier = user_input[equals_index - 1]

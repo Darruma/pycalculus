@@ -16,7 +16,6 @@ class Function:
         return Function(self.func+ '*' + other.func)
     def __sub__(self,other):
         return Function(self.func + '-' + other.func)
-
     def compose(self,other):
         composed = ''
         for i in range(len(self.func)):

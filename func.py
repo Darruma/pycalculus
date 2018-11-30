@@ -37,14 +37,13 @@ class Function:
                 function = function + '**';
             elif token.type == 'func_operand':
                 arg_as_func = Function(token.args.value)
-                function = "Math." +token.value + '(' + arg_as_func.func +")"
+                function = "Math." + token.value + '(' + arg_as_func.func +")"
             else:
                 function = function + token.value
         return function
 
     def explicit_multiply(self,tokens):
         i = 0
-        print(tokens)
         while i < len(tokens)-1:
             if 'operand' in tokens[i].type and 'operand' in tokens[i+1].type:
                 tokens.insert(i+1,Token('*',self.variable))

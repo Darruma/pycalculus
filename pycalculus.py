@@ -6,7 +6,6 @@ storedFunctions = {}
 calc = Calculus(6)
 
 def parseFunctionExpression(declaration):
-	print(declaration)
 	if len(declaration) == 1:
 		if declaration[0] in storedFunctions.keys():
 			return storedFunctions[declaration[0]]
@@ -34,10 +33,9 @@ def parseFunctionExpression(declaration):
 while 1:
 	user_input = input(">> ").split(" ")
 	if user_input[0] == 'integrate':
-		betweenPosition = user_input.index('between')
-		if betweenPosition == -1:
-			print("storing function")
-		else:
+		betweenPosition = -1
+		if 'between' in user_input:
+			betweenPosition = user_input.index('between')
 			integrable_input = user_input[1:betweenPosition]
 			integrablefunc = parseFunctionExpression(integrable_input)
 			if integrablefunc is not None:
@@ -46,10 +44,21 @@ while 1:
 				func_obj = eval('lambda x:' + integrablefunc.func)
 				integrate_between = str(calc.integrate(func_obj)(lowerBound,upperBound))
 				print(">> " + integrate_between)
+		elif betweenPosition == -1:
+			print(">> Error")
+		else:
+			print(">> Error")
+			
 	elif user_input[0] == 'differentiate':
-		atPosition = user_input.index('at')
+		atPosition = -1
+		if 'at' in user_input:
+			atPosition = user_input.index('at')
 		if atPosition == -1:
-			print("storing function")
+			identifier = user_input[1]
+			function = storedFunctions[identifier]
+			identifier = identifier.insert(indentifier.find('(') - 1,'\'')
+			differentiated_function = calc.derivative_operator(eval('lambda x:' + function))
+			storedFunctions.update({identifier:differentiated_function})	
 		else:
 			diffble_input = user_input[1:atPosition]
 			diffblefunc = parseFunctionExpression(diffble_input)

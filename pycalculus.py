@@ -38,14 +38,15 @@ while 1:
 		if betweenPosition == -1:
 			print("storing function")
 		else:
-			integrable_input = [1:betweenPosition]
+			integrable_input = user_input[1:betweenPosition]
 			integrablefunc = parseFunctionExpression(integrable_input)
 			if integrablefunc is not None:
 				lowerBound = float(user_input[user_input.index('and')-1])
 				upperBound = float(user_input[user_input.index('and') + 1]) 
-				integrate_between = str(calc.integrate(eval('lambda x:' + integrablefunc.func))(lowerBound)(upperBound))
+				func_obj = eval('lambda x:' + integrablefunc.func)
+				integrate_between = str(calc.integrate(func_obj)(lowerBound,upperBound))
 				print(">> " + integrate_between)
-	if user_input[0] == 'differentiate':
+	elif user_input[0] == 'differentiate':
 		atPosition = user_input.index('at')
 		if atPosition == -1:
 			print("storing function")

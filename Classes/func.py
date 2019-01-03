@@ -1,5 +1,5 @@
 import re
-from token import Token
+from .token import Token
 class Function:
     def __init__(self, func):
         self.special_functions = ['sin','cos','tan','exp']

@@ -1,6 +1,6 @@
 import math as Math
-from calculus import Calculus
-from func import Function
+from Classes.calculus import Calculus
+from Classes.func import Function
 from functools import reduce
 storedFunctions = {}
 calc = Calculus(6)
